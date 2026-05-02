@@ -1,0 +1,476 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KRVN — Premium 3D Headwear</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Mono:wght@300;400;500&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ==============================
+       HEADER — Fixed, always on top
+  =============================== -->
+  <header id="site-header">
+    <div class="header-inner">
+      <a href="/" class="logo" aria-label="KRVN Home">
+        <span class="logo-mark">K</span><span class="logo-text">RVN</span>
+      </a>
+      <nav class="main-nav" aria-label="Main navigation">
+        <a href="#why-us">Studio</a>
+        <a href="#store">Store</a>
+        <a href="#blog">Journal</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div class="header-actions">
+        <a href="cart.html" class="cart-btn" aria-label="View cart">
+          <span class="cart-icon">⊕</span>
+          <span class="cart-count" id="cart-count">0</span>
+        </a>
+        <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
+          <span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Nav Overlay -->
+  <div class="mobile-nav" id="mobile-nav">
+    <nav>
+      <a href="#why-us" class="mob-link">Studio</a>
+      <a href="#store" class="mob-link">Store</a>
+      <a href="#blog" class="mob-link">Journal</a>
+      <a href="#contact" class="mob-link">Contact</a>
+    </nav>
+  </div>
+
+  <main>
+
+    <!-- ==============================
+         HERO — Scroll-scrubbing video
+    =============================== -->
+    <section id="hero" class="hero-section">
+
+      <!-- The video sits fixed behind everything during the hero scroll -->
+      <div class="hero-video-wrapper">
+        <video
+          id="hero-video"
+          src="assets/videos/hero-loop.mp4"
+          muted
+          playsinline
+          preload="auto"
+          aria-hidden="true"
+        ></video>
+        <!-- Dark overlay for text legibility -->
+        <div class="hero-video-overlay"></div>
+      </div>
+
+      <!-- Floating UI over video -->
+      <div class="hero-content">
+        <div class="hero-eyebrow">
+          <span class="tag">SS — 2025</span>
+          <span class="tag">3D Configured</span>
+        </div>
+        <h1 class="hero-title">
+          <span class="line-1">WEAR</span>
+          <span class="line-2 italic">the Angle</span>
+        </h1>
+        <div class="hero-bottom-row">
+          <p class="hero-sub">
+            Premium headwear, engineered in 3D.<br/>
+            Every stitch. Every curve. Yours.
+          </p>
+          <div class="hero-ctas">
+            <a href="#store" class="btn btn-primary">Shop Now</a>
+            <a href="#why-us" class="btn btn-ghost">Our Process ↓</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scroll indicator -->
+      <div class="scroll-indicator" aria-hidden="true">
+        <span class="scroll-line"></span>
+        <span class="scroll-label">SCROLL</span>
+      </div>
+
+    </section>
+
+    <!-- ==============================
+         MARQUEE — Scrolling text strip
+    =============================== -->
+    <div class="marquee-strip" aria-hidden="true">
+      <div class="marquee-track">
+        <span>Premium Headwear</span>
+        <span>·</span>
+        <span>3D Configured</span>
+        <span>·</span>
+        <span>Streetwear Precision</span>
+        <span>·</span>
+        <span>Built Different</span>
+        <span>·</span>
+        <span>Premium Headwear</span>
+        <span>·</span>
+        <span>3D Configured</span>
+        <span>·</span>
+        <span>Streetwear Precision</span>
+        <span>·</span>
+        <span>Built Different</span>
+        <span>·</span>
+        <span>Premium Headwear</span>
+        <span>·</span>
+        <span>3D Configured</span>
+        <span>·</span>
+        <span>Streetwear Precision</span>
+        <span>·</span>
+        <span>Built Different</span>
+        <span>·</span>
+      </div>
+    </div>
+
+    <!-- ==============================
+         WHY US — Zig-Zag alternating
+    =============================== -->
+    <section id="why-us" class="section why-section">
+      <div class="section-header">
+        <span class="section-tag">/ Why KRVN</span>
+        <h2 class="section-title">Crafted Different,<br/><em>Worn Forever</em></h2>
+      </div>
+
+      <!-- Row 1: Image Left, Text Right -->
+      <div class="zigzag-row zigzag-row--normal">
+        <div class="zigzag-media">
+          <div class="media-placeholder" data-label="3D Modelling Studio">
+            <span class="placeholder-icon">◈</span>
+            <p>3D Model Render</p>
+          </div>
+        </div>
+        <div class="zigzag-text">
+          <span class="feature-num">01</span>
+          <h3>Designed in <em>Three Dimensions</em></h3>
+          <p>Every hat begins as a precise 3D model. We sculpt the silhouette, adjust the crown curve, and tune the brim angle — all digitally — before a single thread is cut. What you see is what you get.</p>
+          <a href="#store" class="link-arrow">Explore models →</a>
+        </div>
+      </div>
+
+      <!-- Row 2: Text Left, Image Right -->
+      <div class="zigzag-row zigzag-row--reverse">
+        <div class="zigzag-text">
+          <span class="feature-num">02</span>
+          <h3>Materials with <em>Intention</em></h3>
+          <p>Forest-green under-brims. Heavyweight 6-panel wool. Laser-cut vents. We source only from mills that align with our obsessive quality standard — no compromise, no shortcuts.</p>
+          <a href="#store" class="link-arrow">View materials →</a>
+        </div>
+        <div class="zigzag-media">
+          <div class="media-placeholder" data-label="Material Close-Up">
+            <span class="placeholder-icon">◉</span>
+            <p>Material Detail</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Row 3: Image Left, Text Right -->
+      <div class="zigzag-row zigzag-row--normal">
+        <div class="zigzag-media">
+          <div class="media-placeholder" data-label="Embroidery Process">
+            <span class="placeholder-icon">⊛</span>
+            <p>Embroidery Detail</p>
+          </div>
+        </div>
+        <div class="zigzag-text">
+          <span class="feature-num">03</span>
+          <h3>Configure <em>Your Way</em></h3>
+          <p>Choose your crown, pick your brim, select your colourway — the 3D configurator lets you build your exact hat and see it rendered live before ordering. Street precision, made personal.</p>
+          <a href="#store" class="link-arrow">Try configurator →</a>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ==============================
+         STORE GRID — Products
+    =============================== -->
+    <section id="store" class="section store-section">
+      <div class="store-header">
+        <div>
+          <span class="section-tag">/ The Collection</span>
+          <h2 class="section-title">Shop <em>All Caps</em></h2>
+        </div>
+        <!-- Filter Buttons -->
+        <div class="filter-bar" role="group" aria-label="Product filters">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="snapback">Snapback</button>
+          <button class="filter-btn" data-filter="fitted">Fitted</button>
+          <button class="filter-btn" data-filter="bucket">Bucket</button>
+          <button class="filter-btn" data-filter="beanie">Beanie</button>
+        </div>
+      </div>
+
+      <!-- Product Grid -->
+      <div class="product-grid" id="product-grid">
+
+        <article class="product-card" data-category="snapback" data-id="001">
+          <div class="product-img-wrap">
+            <div class="product-img-placeholder">
+              <span>IMG</span>
+            </div>
+            <div class="product-badge">New</div>
+            <button class="quick-add" data-id="001" data-name="Angel Snapback — Forest" data-price="89">+ Add</button>
+          </div>
+          <div class="product-info">
+            <h4 class="product-name">Angel Snapback</h4>
+            <p class="product-variant">Forest Green / Black</p>
+            <p class="product-price">$89.00</p>
+          </div>
+        </article>
+
+        <article class="product-card" data-category="fitted" data-id="002">
+          <div class="product-img-wrap">
+            <div class="product-img-placeholder">
+              <span>IMG</span>
+            </div>
+            <button class="quick-add" data-id="002" data-name="Krvn Fitted — Beige" data-price="110">+ Add</button>
+          </div>
+          <div class="product-info">
+            <h4 class="product-name">KRVN Fitted</h4>
+            <p class="product-variant">Beige / Off-White</p>
+            <p class="product-price">$110.00</p>
+          </div>
+        </article>
+
+        <article class="product-card" data-category="bucket" data-id="003">
+          <div class="product-img-wrap">
+            <div class="product-img-placeholder">
+              <span>IMG</span>
+            </div>
+            <div class="product-badge sale-badge">Sale</div>
+            <button class="quick-add" data-id="003" data-name="Cloud Bucket — Black" data-price="65">+ Add</button>
+          </div>
+          <div class="product-info">
+            <h4 class="product-name">Cloud Bucket</h4>
+            <p class="product-variant">Matte Black</p>
+            <p class="product-price">$65.00 <s>$85.00</s></p>
+          </div>
+        </article>
+
+        <article class="product-card" data-category="snapback" data-id="004">
+          <div class="product-img-wrap">
+            <div class="product-img-placeholder">
+              <span>IMG</span>
+            </div>
+            <button class="quick-add" data-id="004" data-name="Block Snap — Bone" data-price="95">+ Add</button>
+          </div>
+          <div class="product-info">
+            <h4 class="product-name">Block Snap</h4>
+            <p class="product-variant">Bone / Forest Under-Brim</p>
+            <p class="product-price">$95.00</p>
+          </div>
+        </article>
+
+        <article class="product-card" data-category="beanie" data-id="005">
+          <div class="product-img-wrap">
+            <div class="product-img-placeholder">
+              <span>IMG</span>
+            </div>
+            <button class="quick-add" data-id="005" data-name="Fold Beanie — Black" data-price="48">+ Add</button>
+          </div>
+          <div class="product-info">
+            <h4 class="product-name">Fold Beanie</h4>
+            <p class="product-variant">Matte Black / Ribbed</p>
+            <p class="product-price">$48.00</p>
+          </div>
+        </article>
+
+        <article class="product-card" data-category="fitted" data-id="006">
+          <div class="product-img-wrap">
+            <div class="product-img-placeholder">
+              <span>IMG</span>
+            </div>
+            <div class="product-badge">Limited</div>
+            <button class="quick-add" data-id="006" data-name="Hex Fitted — Olive" data-price="135">+ Add</button>
+          </div>
+          <div class="product-info">
+            <h4 class="product-name">Hex Fitted</h4>
+            <p class="product-variant">Olive / Structured Crown</p>
+            <p class="product-price">$135.00</p>
+          </div>
+        </article>
+
+      </div>
+
+      <div class="store-see-all">
+        <a href="#" class="btn btn-outline">View Full Collection</a>
+      </div>
+    </section>
+
+    <!-- ==============================
+         BANNER — Feature / Promo
+    =============================== -->
+    <section class="banner-section">
+      <div class="banner-inner">
+        <div class="banner-text">
+          <span class="section-tag">/ Configure Yours</span>
+          <h2 class="banner-title">Build Your Hat<br/><em>in 3D — Live.</em></h2>
+          <p>Step inside the configurator. Choose every element — from crown shape to brim curvature — and see your hat rendered in real-time before it's crafted.</p>
+          <a href="#store" class="btn btn-primary">Launch Configurator</a>
+        </div>
+        <div class="banner-media">
+          <div class="banner-placeholder">
+            <span class="big-label">3D</span>
+            <p>Configurator Preview</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================
+         BLOG GRID — Articles / Journal
+    =============================== -->
+    <section id="blog" class="section blog-section">
+      <div class="section-header">
+        <span class="section-tag">/ Journal</span>
+        <h2 class="section-title">Stories &amp;<br/><em>Process</em></h2>
+      </div>
+
+      <div class="blog-grid">
+
+        <article class="blog-card blog-card--featured">
+          <div class="blog-img-placeholder">
+            <span>IMG</span>
+          </div>
+          <div class="blog-content">
+            <span class="blog-tag">Design Process</span>
+            <h3>How We Model a Hat From Concept to Curve</h3>
+            <p>A deep look inside the 3D studio — from rough sketch to parametric model to first physical sample.</p>
+            <a href="#" class="link-arrow">Read More →</a>
+          </div>
+        </article>
+
+        <article class="blog-card">
+          <div class="blog-img-placeholder small">
+            <span>IMG</span>
+          </div>
+          <div class="blog-content">
+            <span class="blog-tag">Materials</span>
+            <h3>Why the Under-Brim Colour Matters More Than You Think</h3>
+            <a href="#" class="link-arrow">Read More →</a>
+          </div>
+        </article>
+
+        <article class="blog-card">
+          <div class="blog-img-placeholder small">
+            <span>IMG</span>
+          </div>
+          <div class="blog-content">
+            <span class="blog-tag">Culture</span>
+            <h3>The History of the Snapback — And Where It's Headed</h3>
+            <a href="#" class="link-arrow">Read More →</a>
+          </div>
+        </article>
+
+        <article class="blog-card">
+          <div class="blog-img-placeholder small">
+            <span>IMG</span>
+          </div>
+          <div class="blog-content">
+            <span class="blog-tag">Styling</span>
+            <h3>Five Ways to Wear a Fitted Cap in 2025</h3>
+            <a href="#" class="link-arrow">Read More →</a>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ==============================
+         CONTACT — Simple CTA section
+    =============================== -->
+    <section id="contact" class="section contact-section">
+      <div class="contact-inner">
+        <div class="contact-media">
+          <div class="contact-placeholder">
+            <span class="big-label">IMG</span>
+            <p>Brand Shot</p>
+          </div>
+        </div>
+        <div class="contact-text">
+          <span class="section-tag">/ Contact</span>
+          <h2 class="section-title">Let's Talk<br/><em>Headwear.</em></h2>
+          <p>Custom orders, wholesale inquiries, or just want to talk hats? Reach out — we respond within 24 hours via WhatsApp or email.</p>
+          <div class="contact-links">
+            <a href="https://wa.me/1234567890" class="btn btn-primary" target="_blank" rel="noopener">WhatsApp Us</a>
+            <a href="mailto:hello@krvn.co" class="btn btn-ghost">Email Us</a>
+          </div>
+          <div class="contact-meta">
+            <span>hello@krvn.co</span>
+            <span>·</span>
+            <span>@krvn.co</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==============================
+       FOOTER
+  =============================== -->
+  <footer id="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="/" class="logo">
+          <span class="logo-mark">K</span><span class="logo-text">RVN</span>
+        </a>
+        <p class="footer-tagline">Premium headwear,<br/>engineered in 3D.</p>
+      </div>
+
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h5>Shop</h5>
+          <a href="#store">New Arrivals</a>
+          <a href="#store">Snapbacks</a>
+          <a href="#store">Fitted</a>
+          <a href="#store">Beanies</a>
+          <a href="cart.html">Your Cart</a>
+        </div>
+        <div class="footer-col">
+          <h5>Studio</h5>
+          <a href="#why-us">Our Process</a>
+          <a href="#">3D Configurator</a>
+          <a href="#blog">Journal</a>
+          <a href="#">Lookbook</a>
+        </div>
+        <div class="footer-col">
+          <h5>Info</h5>
+          <a href="#">Shipping Policy</a>
+          <a href="#">Returns</a>
+          <a href="#">FAQ</a>
+          <a href="#contact">Contact</a>
+        </div>
+        <div class="footer-col footer-social">
+          <h5>Follow</h5>
+          <a href="#" target="_blank" rel="noopener">Instagram</a>
+          <a href="#" target="_blank" rel="noopener">TikTok</a>
+          <a href="#" target="_blank" rel="noopener">Pinterest</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2025 KRVN Studio. All rights reserved.</span>
+      <span>Designed with precision. Built different.</span>
+    </div>
+  </footer>
+
+  <!-- Toast notification for cart -->
+  <div class="toast" id="toast" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- GSAP via CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

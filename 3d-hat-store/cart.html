@@ -1,0 +1,436 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Cart — KRVN</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Mono:wght@300;400;500&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/cart.css" />
+</head>
+<body class="cart-page">
+
+  <!-- ── HEADER (reused from index) ─────────────────────────── -->
+  <header id="site-header" class="scrolled">
+    <div class="header-inner">
+      <a href="index.html" class="logo" aria-label="KRVN Home">
+        <span class="logo-mark">K</span><span class="logo-text">RVN</span>
+      </a>
+      <nav class="main-nav" aria-label="Main navigation">
+        <a href="index.html#why-us">Studio</a>
+        <a href="index.html#store">Store</a>
+        <a href="index.html#blog">Journal</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+      <div class="header-actions">
+        <a href="cart.html" class="cart-btn active-page" aria-label="View cart">
+          <span class="cart-icon">⊕</span>
+          <span class="cart-count" id="cart-count">0</span>
+        </a>
+        <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
+          <span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Nav -->
+  <div class="mobile-nav" id="mobile-nav">
+    <nav>
+      <a href="index.html#why-us" class="mob-link">Studio</a>
+      <a href="index.html#store" class="mob-link">Store</a>
+      <a href="index.html#blog" class="mob-link">Journal</a>
+      <a href="index.html#contact" class="mob-link">Contact</a>
+    </nav>
+  </div>
+
+  <main class="cart-main">
+
+    <!-- ── CART HEADER ──────────────────────────────────────── -->
+    <div class="cart-page-header">
+      <div class="cart-page-header-inner">
+        <div class="cart-breadcrumb">
+          <a href="index.html">← Back to Store</a>
+        </div>
+        <div class="cart-title-block">
+          <span class="section-tag">/ Your Order</span>
+          <h1 class="cart-page-title">Your <em>Cart</em></h1>
+        </div>
+        <!-- Step indicator -->
+        <div class="checkout-steps" aria-label="Checkout steps">
+          <div class="step active" data-step="1">
+            <span class="step-num">01</span>
+            <span class="step-label">Review</span>
+          </div>
+          <div class="step-connector"></div>
+          <div class="step" data-step="2" id="step-2-indicator">
+            <span class="step-num">02</span>
+            <span class="step-label">Details</span>
+          </div>
+          <div class="step-connector"></div>
+          <div class="step" data-step="3" id="step-3-indicator">
+            <span class="step-num">03</span>
+            <span class="step-label">WhatsApp</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── MAIN CART LAYOUT ──────────────────────────────────── -->
+    <div class="cart-layout">
+
+      <!-- LEFT: Cart Items + Form (Steps 1 & 2) -->
+      <div class="cart-left">
+
+        <!-- ─── STEP 1: Cart Items ─────────────────────────── -->
+        <section class="cart-step" id="step-1" aria-label="Review your items">
+
+          <!-- Empty state -->
+          <div class="cart-empty" id="cart-empty" hidden>
+            <div class="empty-icon" aria-hidden="true">◎</div>
+            <h2>Your cart is empty</h2>
+            <p>Looks like you haven't added any hats yet.<br/>Head back to the store and find your next cap.</p>
+            <a href="index.html#store" class="btn btn-primary">Browse Collection</a>
+          </div>
+
+          <!-- Cart items list -->
+          <div class="cart-items-wrap" id="cart-items-wrap">
+            <div class="cart-items-header">
+              <span>Product</span>
+              <span>Qty</span>
+              <span>Price</span>
+            </div>
+            <ul class="cart-items-list" id="cart-items-list" aria-label="Cart items">
+              <!-- Items injected by cart.js -->
+            </ul>
+
+            <!-- Cart actions -->
+            <div class="cart-actions" id="cart-actions">
+              <button class="clear-cart-btn" id="clear-cart-btn" aria-label="Clear all items">
+                ✕ Clear Cart
+              </button>
+              <a href="index.html#store" class="link-arrow">Continue Shopping →</a>
+            </div>
+          </div>
+
+          <!-- Step 1 → Step 2 CTA -->
+          <div class="step-cta" id="step-1-cta">
+            <button class="btn btn-primary btn-full" id="proceed-to-details" aria-label="Proceed to enter your details">
+              Proceed to Details →
+            </button>
+          </div>
+
+        </section>
+
+        <!-- ─── STEP 2: Customer Details Form ─────────────── -->
+        <section class="cart-step" id="step-2" aria-label="Enter your details" hidden>
+
+          <div class="step-header">
+            <button class="step-back-btn" id="back-to-step1" aria-label="Back to cart review">
+              ← Back
+            </button>
+            <h2 class="step-title">Your <em>Details</em></h2>
+            <p class="step-desc">We'll include these with your order on WhatsApp so everything's confirmed before we start cutting.</p>
+          </div>
+
+          <!-- Customer Form — NO <form> tag, uses div + event handlers -->
+          <div class="checkout-form" id="checkout-form" role="form" aria-label="Customer details">
+
+            <div class="form-row form-row--2">
+              <div class="form-group">
+                <label class="form-label" for="field-first-name">First Name <span class="required">*</span></label>
+                <input
+                  class="form-input"
+                  id="field-first-name"
+                  type="text"
+                  placeholder="e.g. Marcus"
+                  autocomplete="given-name"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="field-last-name">Last Name <span class="required">*</span></label>
+                <input
+                  class="form-input"
+                  id="field-last-name"
+                  type="text"
+                  placeholder="e.g. Trent"
+                  autocomplete="family-name"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="field-whatsapp">WhatsApp Number <span class="required">*</span></label>
+              <div class="input-with-prefix">
+                <span class="input-prefix">+</span>
+                <input
+                  class="form-input"
+                  id="field-whatsapp"
+                  type="tel"
+                  placeholder="1 555 000 0000"
+                  autocomplete="tel"
+                  required
+                />
+              </div>
+              <span class="form-hint">Include country code. We'll confirm your order here.</span>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="field-email">Email Address <span class="optional">(optional)</span></label>
+              <input
+                class="form-input"
+                id="field-email"
+                type="email"
+                placeholder="your@email.com"
+                autocomplete="email"
+              />
+              <span class="form-hint">For order confirmations and updates.</span>
+            </div>
+
+            <div class="form-divider">
+              <span>Shipping Details</span>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="field-address">Delivery Address <span class="required">*</span></label>
+              <input
+                class="form-input"
+                id="field-address"
+                type="text"
+                placeholder="Street address, apartment, unit"
+                autocomplete="street-address"
+                required
+              />
+            </div>
+
+            <div class="form-row form-row--3">
+              <div class="form-group">
+                <label class="form-label" for="field-city">City <span class="required">*</span></label>
+                <input
+                  class="form-input"
+                  id="field-city"
+                  type="text"
+                  placeholder="London"
+                  autocomplete="address-level2"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="field-zip">Postcode <span class="required">*</span></label>
+                <input
+                  class="form-input"
+                  id="field-zip"
+                  type="text"
+                  placeholder="SW1A 1AA"
+                  autocomplete="postal-code"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="field-country">Country <span class="required">*</span></label>
+                <div class="select-wrap">
+                  <select class="form-input form-select" id="field-country" autocomplete="country-name" required>
+                    <option value="" disabled selected>Select…</option>
+                    <option value="UK">United Kingdom</option>
+                    <option value="US">United States</option>
+                    <option value="CA">Canada</option>
+                    <option value="AU">Australia</option>
+                    <option value="DE">Germany</option>
+                    <option value="FR">France</option>
+                    <option value="MA">Morocco</option>
+                    <option value="NG">Nigeria</option>
+                    <option value="ZA">South Africa</option>
+                    <option value="OTHER">Other</option>
+                  </select>
+                  <span class="select-arrow">↓</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="field-size">Hat Size <span class="required">*</span></label>
+              <div class="size-selector" id="size-selector" role="radiogroup" aria-label="Select hat size">
+                <button class="size-btn" data-size="S/M" type="button">S/M</button>
+                <button class="size-btn" data-size="L/XL" type="button">L/XL</button>
+                <button class="size-btn" data-size="One Size" type="button">One Size</button>
+                <button class="size-btn" data-size="Custom" type="button">Custom</button>
+              </div>
+              <span class="form-hint">Most snapbacks and beanies are One Size. Fitted caps require S/M or L/XL.</span>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="field-notes">Order Notes <span class="optional">(optional)</span></label>
+              <textarea
+                class="form-input form-textarea"
+                id="field-notes"
+                placeholder="Custom colours, embroidery text, special requests…"
+                rows="3"
+              ></textarea>
+            </div>
+
+            <!-- Validation error messages -->
+            <div class="form-errors" id="form-errors" hidden aria-live="assertive" aria-atomic="true">
+              <!-- Errors injected by cart.js -->
+            </div>
+
+            <!-- Step 2 → Step 3 CTA -->
+            <div class="step-cta">
+              <button class="btn btn-primary btn-full btn-whatsapp" id="generate-whatsapp" aria-label="Send order via WhatsApp">
+                <span class="wa-icon" aria-hidden="true">
+                  <!-- WhatsApp SVG icon -->
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                  </svg>
+                </span>
+                Send Order via WhatsApp
+              </button>
+              <p class="wa-disclaimer">
+                Tapping the button above will open WhatsApp with your full order pre-filled. No payment is taken here — our team will confirm availability and send an invoice.
+              </p>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ─── STEP 3: Confirmation ───────────────────────── -->
+        <section class="cart-step" id="step-3" aria-label="Order sent" hidden>
+          <div class="confirmation-block">
+            <div class="confirmation-icon" aria-hidden="true">✓</div>
+            <h2 class="confirmation-title">Order Sent!</h2>
+            <p class="confirmation-sub">Your cart has been pre-filled into WhatsApp. If the app didn't open automatically, use the button below.</p>
+            <a href="#" class="btn btn-primary" id="wa-fallback-btn" target="_blank" rel="noopener">
+              Open WhatsApp Order
+            </a>
+            <div class="confirmation-next">
+              <p>What happens next?</p>
+              <ol class="next-steps-list">
+                <li>Our team reviews your order within 24 hrs</li>
+                <li>We confirm stock &amp; send a payment invoice</li>
+                <li>Once paid, your hat goes into production</li>
+                <li>Shipping notification sent when dispatched</li>
+              </ol>
+            </div>
+            <button class="btn btn-outline" id="start-over-btn">
+              Start a New Order
+            </button>
+          </div>
+        </section>
+
+      </div><!-- /.cart-left -->
+
+
+      <!-- RIGHT: Order Summary (always visible) -->
+      <aside class="cart-right" id="cart-summary" aria-label="Order summary">
+
+        <div class="summary-card">
+          <h3 class="summary-title">Order Summary</h3>
+
+          <!-- Mini item list in summary -->
+          <ul class="summary-items" id="summary-items" aria-label="Summary of items">
+            <!-- Injected by cart.js -->
+          </ul>
+
+          <div class="summary-divider"></div>
+
+          <div class="summary-row">
+            <span>Subtotal</span>
+            <span id="summary-subtotal">$0.00</span>
+          </div>
+          <div class="summary-row">
+            <span>Shipping</span>
+            <span class="shipping-note" id="summary-shipping">Confirmed via WhatsApp</span>
+          </div>
+
+          <div class="summary-divider"></div>
+
+          <div class="summary-row summary-total">
+            <span>Estimated Total</span>
+            <span id="summary-total">$0.00</span>
+          </div>
+
+          <!-- Trust signals -->
+          <div class="trust-signals">
+            <div class="trust-item">
+              <span class="trust-icon" aria-hidden="true">◈</span>
+              <span>Handcrafted &amp; quality-checked</span>
+            </div>
+            <div class="trust-item">
+              <span class="trust-icon" aria-hidden="true">◉</span>
+              <span>Secure WhatsApp checkout</span>
+            </div>
+            <div class="trust-item">
+              <span class="trust-icon" aria-hidden="true">⊛</span>
+              <span>No payment until confirmed</span>
+            </div>
+          </div>
+
+          <!-- Promo code -->
+          <div class="promo-wrap">
+            <label class="form-label" for="promo-input">Promo Code</label>
+            <div class="promo-row">
+              <input
+                class="form-input promo-input"
+                id="promo-input"
+                type="text"
+                placeholder="KRVN10"
+                aria-label="Enter promo code"
+              />
+              <button class="btn btn-outline promo-btn" id="apply-promo">Apply</button>
+            </div>
+            <div class="promo-msg" id="promo-msg" aria-live="polite"></div>
+          </div>
+
+        </div><!-- /.summary-card -->
+
+        <!-- Mobile: sticky bottom CTA (hidden on desktop) -->
+        <div class="mobile-cta" id="mobile-cta">
+          <div class="mobile-cta-total">
+            Total: <strong id="mobile-total">$0.00</strong>
+          </div>
+          <button class="btn btn-primary" id="mobile-proceed-btn">
+            Checkout →
+          </button>
+        </div>
+
+      </aside>
+
+    </div><!-- /.cart-layout -->
+
+  </main>
+
+  <!-- ── FOOTER (minimal) ──────────────────────────────────── -->
+  <footer id="footer" class="cart-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">
+          <span class="logo-mark">K</span><span class="logo-text">RVN</span>
+        </a>
+        <p class="footer-tagline">Premium headwear, engineered in 3D.</p>
+      </div>
+      <div class="footer-bottom-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Returns</a>
+        <a href="index.html#contact">Contact</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 KRVN Studio. All rights reserved.</span>
+      <span>No payment is processed on this site.</span>
+    </div>
+  </footer>
+
+  <!-- Toast -->
+  <div class="toast" id="toast" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/cart.js"></script>
+</body>
+</html>
