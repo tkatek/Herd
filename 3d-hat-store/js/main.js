@@ -128,6 +128,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function initVideoScrub() {
+      heroVideo.pause();
+      heroVideo.currentTime = 0;
       /**
        * `video.duration` — total length of the video in seconds.
        * Example: a 6-second clip gives duration = 6.
@@ -148,6 +150,11 @@ document.addEventListener('DOMContentLoaded', () => {
         start:      'top top',            // When hero top hits viewport top
         end:        'bottom bottom',      // When hero bottom hits viewport bottom
         scrub:      true,                 // Ties animation to scroll position (true = instant, number = lag seconds)
+        once:       false,
+        onEnter:    () => heroVideo.pause(),
+        onEnterBack: () => heroVideo.pause(),
+        onLeave:    () => heroVideo.pause(),
+        onLeaveBack: () => heroVideo.pause(),
         /*
          * scrub: true  → currentTime updates instantly with scroll.
          *                 Most precise, but can feel mechanical.
