@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,9 +11,6 @@
 </head>
 <body>
 
-  <!-- ==============================
-       HEADER — Fixed, always on top
-  =============================== -->
   <header id="site-header">
     <div class="header-inner">
       <a href="/" class="logo" aria-label="KRVN Home">
@@ -38,7 +34,6 @@
     </div>
   </header>
 
-  <!-- Mobile Nav Overlay -->
   <div class="mobile-nav" id="mobile-nav">
     <nav>
       <a href="#why-us" class="mob-link">Studio</a>
@@ -51,35 +46,38 @@
   <main>
 
     <!-- ==============================
-         HERO — Scroll-scrubbing video
+         HERO — Single viewport, two-column
+         Left: eyebrow + title + CTAs
+         Right: product image
     =============================== -->
     <section id="hero" class="hero-section">
 
-      <!-- The video sits fixed behind everything during the hero scroll -->
+      <!-- Full-bleed background video -->
       <div class="hero-video-wrapper">
-       <video
-  id="hero-video"
-  src="assets/videos/video_1eaa3f47-5823-4509-95bb-ed3ee0cff192.mp4"
-  muted
-  playsinline
-  preload="auto"
-  aria-hidden="true"
-></video>
-        <!-- Dark overlay for text legibility -->
+        <video
+          id="hero-video"
+          src="assets/videos/video_1eaa3f47-5823-4509-95bb-ed3ee0cff192.mp4"
+          muted
+          playsinline
+          preload="auto"
+          aria-hidden="true"
+        ></video>
         <div class="hero-video-overlay"></div>
       </div>
 
-      <!-- Floating UI over video -->
-      <!-- <div class="hero-content">
-        <div class="hero-eyebrow">
-          <span class="tag">SS — 2025</span>
-          <span class="tag">3D Configured</span>
-        </div>
-        <h1 class="hero-title">
-          <span class="line-1">WEAR</span>
-          <span class="line-2 italic">the Angle</span>
-        </h1>
-        <div class="hero-bottom-row">
+      <!-- Two-column content over video -->
+      <div class="hero-content">
+
+        <!-- LEFT column: text + CTAs -->
+        <div class="hero-left">
+          <div class="hero-eyebrow">
+            <span class="tag">SS — 2025</span>
+            <span class="tag">3D Configured</span>
+          </div>
+          <h1 class="hero-title">
+            <span class="line-1">WEAR</span>
+            <span class="line-2">the Angle</span>
+          </h1>
           <p class="hero-sub">
             Premium headwear, engineered in 3D.<br/>
             Every stitch. Every curve. Yours.
@@ -89,7 +87,20 @@
             <a href="#why-us" class="btn btn-ghost">Our Process ↓</a>
           </div>
         </div>
-      </div> -->
+
+        <!-- RIGHT column: featured product image -->
+        <div class="hero-right">
+          <div class="hero-img-wrap">
+            <img
+              src="assets/images/hero-product.jpg"
+              alt="KRVN Signature Cap"
+              class="hero-img"
+              onerror="this.onerror=null; this.parentElement.classList.add('hero-img-fallback');"
+            />
+          </div>
+        </div>
+
+      </div>
 
       <!-- Scroll indicator -->
       <div class="scroll-indicator" aria-hidden="true">
@@ -99,107 +110,87 @@
 
     </section>
 
-    <!-- ==============================
-         MARQUEE — Scrolling text strip
-    =============================== -->
+    <!-- MARQUEE -->
     <div class="marquee-strip" aria-hidden="true">
       <div class="marquee-track">
-        <span>Premium Headwear</span>
-        <span>·</span>
-        <span>3D Configured</span>
-        <span>·</span>
-        <span>Streetwear Precision</span>
-        <span>·</span>
-        <span>Built Different</span>
-        <span>·</span>
-        <span>Premium Headwear</span>
-        <span>·</span>
-        <span>3D Configured</span>
-        <span>·</span>
-        <span>Streetwear Precision</span>
-        <span>·</span>
-        <span>Built Different</span>
-        <span>·</span>
-        <span>Premium Headwear</span>
-        <span>·</span>
-        <span>3D Configured</span>
-        <span>·</span>
-        <span>Streetwear Precision</span>
-        <span>·</span>
-        <span>Built Different</span>
-        <span>·</span>
+        <span>Premium Headwear</span><span>·</span>
+        <span>3D Configured</span><span>·</span>
+        <span>Streetwear Precision</span><span>·</span>
+        <span>Built Different</span><span>·</span>
+        <span>Premium Headwear</span><span>·</span>
+        <span>3D Configured</span><span>·</span>
+        <span>Streetwear Precision</span><span>·</span>
+        <span>Built Different</span><span>·</span>
+        <span>Premium Headwear</span><span>·</span>
+        <span>3D Configured</span><span>·</span>
+        <span>Streetwear Precision</span><span>·</span>
+        <span>Built Different</span><span>·</span>
       </div>
     </div>
 
-    <!-- ==============================
-         WHY US — Zig-Zag alternating
-    =============================== -->
+    <!-- WHY US -->
     <section id="why-us" class="section why-section">
       <div class="section-header">
         <span class="section-tag">/ Why KRVN</span>
         <h2 class="section-title">Crafted Different,<br/><em>Worn Forever</em></h2>
       </div>
 
-      <!-- Row 1: Image Left, Text Right -->
       <div class="zigzag-row zigzag-row--normal">
         <div class="zigzag-media">
-          <div class="media-placeholder" data-label="3D Modelling Studio">
-            <span class="placeholder-icon">◈</span>
-            <p>3D Model Render</p>
+          <img src="assets/images/why-3d-model.jpg" alt="3D Hat Modelling Studio" class="zigzag-img"
+            onerror="this.onerror=null; this.parentElement.classList.add('img-fallback'); this.style.display='none';" />
+          <div class="zigzag-img-fallback" aria-hidden="true">
+            <span class="placeholder-icon">◈</span><p>3D Model Render</p>
           </div>
         </div>
         <div class="zigzag-text">
           <span class="feature-num">01</span>
           <h3>Designed in <em>Three Dimensions</em></h3>
-          <p>Every hat begins as a precise 3D model. We sculpt the silhouette, adjust the crown curve, and tune the brim angle — all digitally — before a single thread is cut. What you see is what you get.</p>
+          <p>Every hat begins as a precise 3D model. We sculpt the silhouette, adjust the crown curve, and tune the brim angle — all digitally — before a single thread is cut.</p>
           <a href="#store" class="link-arrow">Explore models →</a>
         </div>
       </div>
 
-      <!-- Row 2: Text Left, Image Right -->
       <div class="zigzag-row zigzag-row--reverse">
         <div class="zigzag-text">
           <span class="feature-num">02</span>
           <h3>Materials with <em>Intention</em></h3>
-          <p>Forest-green under-brims. Heavyweight 6-panel wool. Laser-cut vents. We source only from mills that align with our obsessive quality standard — no compromise, no shortcuts.</p>
+          <p>Forest-green under-brims. Heavyweight 6-panel wool. Laser-cut vents. We source only from mills that align with our obsessive quality standard.</p>
           <a href="#store" class="link-arrow">View materials →</a>
         </div>
         <div class="zigzag-media">
-          <div class="media-placeholder" data-label="Material Close-Up">
-            <span class="placeholder-icon">◉</span>
-            <p>Material Detail</p>
+          <img src="assets/images/why-materials.jpg" alt="Premium Hat Materials" class="zigzag-img"
+            onerror="this.onerror=null; this.parentElement.classList.add('img-fallback'); this.style.display='none';" />
+          <div class="zigzag-img-fallback" aria-hidden="true">
+            <span class="placeholder-icon">◉</span><p>Material Detail</p>
           </div>
         </div>
       </div>
 
-      <!-- Row 3: Image Left, Text Right -->
       <div class="zigzag-row zigzag-row--normal">
         <div class="zigzag-media">
-          <div class="media-placeholder" data-label="Embroidery Process">
-            <span class="placeholder-icon">⊛</span>
-            <p>Embroidery Detail</p>
+          <img src="assets/images/why-embroidery.jpg" alt="Hat Embroidery Process" class="zigzag-img"
+            onerror="this.onerror=null; this.parentElement.classList.add('img-fallback'); this.style.display='none';" />
+          <div class="zigzag-img-fallback" aria-hidden="true">
+            <span class="placeholder-icon">⊛</span><p>Embroidery Detail</p>
           </div>
         </div>
         <div class="zigzag-text">
           <span class="feature-num">03</span>
           <h3>Configure <em>Your Way</em></h3>
-          <p>Choose your crown, pick your brim, select your colourway — the 3D configurator lets you build your exact hat and see it rendered live before ordering. Street precision, made personal.</p>
+          <p>Choose your crown, pick your brim, select your colourway — the 3D configurator lets you build your exact hat and see it rendered live before ordering.</p>
           <a href="#store" class="link-arrow">Try configurator →</a>
         </div>
       </div>
-
     </section>
 
-    <!-- ==============================
-         STORE GRID — Products
-    =============================== -->
+    <!-- STORE -->
     <section id="store" class="section store-section">
       <div class="store-header">
         <div>
           <span class="section-tag">/ The Collection</span>
           <h2 class="section-title">Shop <em>All Caps</em></h2>
         </div>
-        <!-- Filter Buttons -->
         <div class="filter-bar" role="group" aria-label="Product filters">
           <button class="filter-btn active" data-filter="all">All</button>
           <button class="filter-btn" data-filter="snapback">Snapback</button>
@@ -209,12 +200,11 @@
         </div>
       </div>
 
-      <!-- Product Grid -->
       <div class="product-grid" id="product-grid">
 
         <article class="product-card" data-category="snapback" data-id="001">
           <div class="product-img-wrap">
-            <img src="assets/images/d11026b1fe1a4668e280c7766fa4257f.jpg" alt="Angel Snapback — Forest" class="product-img" />
+            <img src="assets/images/d11026b1fe1a4668e280c7766fa4257f.jpg" alt="Angel Snapback — Forest" class="product-img" onerror="this.onerror=null; this.classList.add('img-error');" />
             <div class="product-badge">New</div>
             <button class="quick-add" data-id="001" data-name="Angel Snapback — Forest" data-price="89">+ Add</button>
           </div>
@@ -227,7 +217,7 @@
 
         <article class="product-card" data-category="fitted" data-id="002">
           <div class="product-img-wrap">
-            <img src="assets/images/krvn-fitted.jpg" alt="KRVN Fitted — Beige" class="product-img" />
+            <img src="assets/images/krvn-fitted.jpg" alt="KRVN Fitted — Beige" class="product-img" onerror="this.onerror=null; this.classList.add('img-error');" />
             <button class="quick-add" data-id="002" data-name="Krvn Fitted — Beige" data-price="110">+ Add</button>
           </div>
           <div class="product-info">
@@ -239,7 +229,7 @@
 
         <article class="product-card" data-category="bucket" data-id="003">
           <div class="product-img-wrap">
-            <img src="assets/images/cloud-bucket.jpg" alt="Cloud Bucket — Black" class="product-img" />
+            <img src="assets/images/cloud-bucket.jpg" alt="Cloud Bucket — Black" class="product-img" onerror="this.onerror=null; this.classList.add('img-error');" />
             <div class="product-badge sale-badge">Sale</div>
             <button class="quick-add" data-id="003" data-name="Cloud Bucket — Black" data-price="65">+ Add</button>
           </div>
@@ -252,7 +242,7 @@
 
         <article class="product-card" data-category="snapback" data-id="004">
           <div class="product-img-wrap">
-            <img src="assets/images/block-snap.jpg" alt="Block Snap — Bone" class="product-img" />
+            <img src="assets/images/block-snap.jpg" alt="Block Snap — Bone" class="product-img" onerror="this.onerror=null; this.classList.add('img-error');" />
             <button class="quick-add" data-id="004" data-name="Block Snap — Bone" data-price="95">+ Add</button>
           </div>
           <div class="product-info">
@@ -264,7 +254,7 @@
 
         <article class="product-card" data-category="beanie" data-id="005">
           <div class="product-img-wrap">
-            <img src="assets/images/fold-beanie.jpg" alt="Fold Beanie — Black" class="product-img" />
+            <img src="assets/images/fold-beanie.jpg" alt="Fold Beanie — Black" class="product-img" onerror="this.onerror=null; this.classList.add('img-error');" />
             <button class="quick-add" data-id="005" data-name="Fold Beanie — Black" data-price="48">+ Add</button>
           </div>
           <div class="product-info">
@@ -276,7 +266,7 @@
 
         <article class="product-card" data-category="fitted" data-id="006">
           <div class="product-img-wrap">
-            <img src="assets/images/hex-fitted.jpg" alt="Hex Fitted — Olive" class="product-img" />
+            <img src="assets/images/hex-fitted.jpg" alt="Hex Fitted — Olive" class="product-img" onerror="this.onerror=null; this.classList.add('img-error');" />
             <div class="product-badge">Limited</div>
             <button class="quick-add" data-id="006" data-name="Hex Fitted — Olive" data-price="135">+ Add</button>
           </div>
@@ -294,9 +284,7 @@
       </div>
     </section>
 
-    <!-- ==============================
-         BANNER — Feature / Promo
-    =============================== -->
+    <!-- BANNER -->
     <section class="banner-section">
       <div class="banner-inner">
         <div class="banner-text">
@@ -307,34 +295,22 @@
         </div>
         <div class="banner-media">
           <div class="banner-video-wrapper">
-            <video
-              class="banner-video"
-              src="assets/videos/video_1eaa3f47-5823-4509-95bb-ed3ee0cff192.mp4"
-              muted
-              playsinline
-              preload="auto"
-              aria-hidden="true"
-            ></video>
+            <video class="banner-video" src="assets/videos/video_1eaa3f47-5823-4509-95bb-ed3ee0cff192.mp4"
+              muted playsinline preload="auto" aria-hidden="true"></video>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ==============================
-         BLOG GRID — Articles / Journal
-    =============================== -->
+    <!-- BLOG -->
     <section id="blog" class="section blog-section">
       <div class="section-header">
         <span class="section-tag">/ Journal</span>
         <h2 class="section-title">Stories &amp;<br/><em>Process</em></h2>
       </div>
-
       <div class="blog-grid">
-
         <article class="blog-card blog-card--featured">
-          <div class="blog-img-placeholder">
-            <span>IMG</span>
-          </div>
+          <div class="blog-img-placeholder"></div>
           <div class="blog-content">
             <span class="blog-tag">Design Process</span>
             <h3>How We Model a Hat From Concept to Curve</h3>
@@ -342,46 +318,34 @@
             <a href="#" class="link-arrow">Read More →</a>
           </div>
         </article>
-
         <article class="blog-card">
-          <div class="blog-img-placeholder small">
-            <span>IMG</span>
-          </div>
+          <div class="blog-img-placeholder small"></div>
           <div class="blog-content">
             <span class="blog-tag">Materials</span>
             <h3>Why the Under-Brim Colour Matters More Than You Think</h3>
             <a href="#" class="link-arrow">Read More →</a>
           </div>
         </article>
-
         <article class="blog-card">
-          <div class="blog-img-placeholder small">
-            <span>IMG</span>
-          </div>
+          <div class="blog-img-placeholder small"></div>
           <div class="blog-content">
             <span class="blog-tag">Culture</span>
             <h3>The History of the Snapback — And Where It's Headed</h3>
             <a href="#" class="link-arrow">Read More →</a>
           </div>
         </article>
-
         <article class="blog-card">
-          <div class="blog-img-placeholder small">
-            <span>IMG</span>
-          </div>
+          <div class="blog-img-placeholder small"></div>
           <div class="blog-content">
             <span class="blog-tag">Styling</span>
             <h3>Five Ways to Wear a Fitted Cap in 2025</h3>
             <a href="#" class="link-arrow">Read More →</a>
           </div>
         </article>
-
       </div>
     </section>
 
-    <!-- ==============================
-         CONTACT — Simple CTA section
-    =============================== -->
+    <!-- CONTACT -->
     <section id="contact" class="section contact-section">
       <div class="contact-inner">
         <div class="contact-media">
@@ -399,9 +363,7 @@
             <a href="mailto:hello@krvn.co" class="btn btn-ghost">Email Us</a>
           </div>
           <div class="contact-meta">
-            <span>hello@krvn.co</span>
-            <span>·</span>
-            <span>@krvn.co</span>
+            <span>hello@krvn.co</span><span>·</span><span>@krvn.co</span>
           </div>
         </div>
       </div>
@@ -409,9 +371,6 @@
 
   </main>
 
-  <!-- ==============================
-       FOOTER
-  =============================== -->
   <footer id="footer">
     <div class="footer-inner">
       <div class="footer-brand">
@@ -420,7 +379,6 @@
         </a>
         <p class="footer-tagline">Premium headwear,<br/>engineered in 3D.</p>
       </div>
-
       <div class="footer-cols">
         <div class="footer-col">
           <h5>Shop</h5>
@@ -452,17 +410,14 @@
         </div>
       </div>
     </div>
-
     <div class="footer-bottom">
       <span>© 2025 KRVN Studio. All rights reserved.</span>
       <span>Designed with precision. Built different.</span>
     </div>
   </footer>
 
-  <!-- Toast notification for cart -->
   <div class="toast" id="toast" aria-live="polite" aria-atomic="true"></div>
 
-  <!-- GSAP via CDN -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script src="js/main.js"></script>
