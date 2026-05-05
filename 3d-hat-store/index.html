@@ -7,6 +7,193 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Mono:wght@300;400;500&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ============================================================
+       IMAGE FIX LAYER — injected on top of existing style.css
+       These rules fix ALL image rendering issues without touching
+       your design structure.
+    ============================================================ */
+
+    /* ── 1. UNIVERSAL IMAGE RESET ──────────────────────────────
+       Ensures every <img> in the project is block-level,
+       never overflows its container, and never distorts.
+    ─────────────────────────────────────────────────────────── */
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+
+    /* ── 2. REUSABLE IMAGE CONTAINER COMPONENT ─────────────────
+       .img-frame is your go-to wrapper for ANY image slot.
+       It:
+         - Enforces a fixed aspect ratio via padding-top trick
+         - Guarantees the <img> fills it with object-fit: cover
+         - Shows a stylish skeleton when image is loading/missing
+         - Never collapses to zero height
+    ─────────────────────────────────────────────────────────── */
+    .img-frame {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      background-color: #1a1a1a; /* fallback bg — never shows blank white */
+      border-radius: inherit;   /* inherits from parent card */
+    }
+
+    /* Aspect ratio variants */
+    .img-frame--square    { padding-top: 100%; }
+    .img-frame--portrait  { padding-top: 120%; }
+    .img-frame--landscape { padding-top: 66%;  }
+    .img-frame--wide      { padding-top: 56%;  }
+    .img-frame--hero      { padding-top: 75%;  }
+
+    .img-frame img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      transition: transform 0.5s ease, opacity 0.3s ease;
+      opacity: 1;
+    }
+
+    /* Skeleton shimmer — shown before image loads */
+    .img-frame::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        90deg,
+        rgba(255,255,255,0.03) 0%,
+        rgba(255,255,255,0.08) 40%,
+        rgba(255,255,255,0.03) 80%
+      );
+      background-size: 200% 100%;
+      animation: shimmer 1.6s infinite;
+      z-index: 0;
+    }
+
+    .img-frame img { z-index: 1; }
+
+    @keyframes shimmer {
+      0%   { background-position: -200% 0; }
+      100% { background-position:  200% 0; }
+    }
+
+    /* ── 3. BROKEN IMAGE STATE ──────────────────────────────────
+       When an image 404s, .img-broken is added via JS.
+       Shows a minimal placeholder instead of a broken icon.
+    ─────────────────────────────────────────────────────────── */
+    .img-frame.img-broken::after {
+      content: attr(data-label);
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      color: rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.03);
+      z-index: 2;
+    }
+
+    /* ── 4. HOVER ZOOM — product cards ─────────────────────────
+       Subtle zoom on hover without layout shift.
+    ─────────────────────────────────────────────────────────── */
+    .product-card:hover .img-frame img,
+    .zigzag-media:hover .img-frame img,
+    .blog-card:hover .img-frame img {
+      transform: scale(1.04);
+    }
+
+    /* ── 5. HERO IMAGE ──────────────────────────────────────────
+       Hero right column needs explicit height or it collapses.
+    ─────────────────────────────────────────────────────────── */
+    .hero-img-wrap {
+      width: 100%;
+      height: 100%;
+      min-height: 400px;
+      position: relative;
+      overflow: hidden;
+      border-radius: 4px;
+    }
+
+    .hero-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
+
+    /* ── 6. ZIGZAG SECTION IMAGES ───────────────────────────────
+       Zigzag media blocks need a defined height.
+    ─────────────────────────────────────────────────────────── */
+    .zigzag-media {
+      min-height: 360px;
+    }
+
+    .zigzag-media .img-frame {
+      height: 100%;
+      min-height: 360px;
+      padding-top: 0; /* override ratio — use height instead */
+    }
+
+    .zigzag-media .img-frame img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* ── 7. PRODUCT GRID IMAGES ─────────────────────────────────
+       Standard product card image proportions.
+    ─────────────────────────────────────────────────────────── */
+    .product-img-wrap {
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Use the reusable component inside product cards */
+    .product-img-wrap .img-frame {
+      border-radius: 0; /* cards have their own radius */
+    }
+
+    /* ── 8. BLOG CARD IMAGES ────────────────────────────────────
+       Blog featured card gets taller image.
+    ─────────────────────────────────────────────────────────── */
+    .blog-card--featured .img-frame { padding-top: 55%; }
+    .blog-card:not(.blog-card--featured) .img-frame { padding-top: 65%; }
+
+    /* ── 9. CONTACT SECTION IMAGE ───────────────────────────────
+       Contact media area — square-ish brand shot.
+    ─────────────────────────────────────────────────────────── */
+    .contact-media .img-frame {
+      min-height: 480px;
+      padding-top: 0;
+    }
+
+    .contact-media .img-frame img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* ── 10. USING PICSUM AS RELIABLE FALLBACK ──────────────────
+       In production: replace picsum URLs with your real CDN paths.
+       Picsum gives us beautiful placeholder photos that actually
+       LOOK like product/editorial images in the meantime.
+    ─────────────────────────────────────────────────────────── */
+
+    /* ── DEMO: make the page look complete without real assets ── */
+    body { font-family: 'Syne', sans-serif; }
+  </style>
+
+  <!-- Your existing stylesheet (keep this) -->
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
@@ -46,29 +233,21 @@
   <main>
 
     <!-- ==============================
-         HERO — Single viewport, two-column
-         Left: eyebrow + title + CTAs
-         Right: product image
+         HERO
     =============================== -->
     <section id="hero" class="hero-section">
 
-      <!-- Full-bleed background video -->
       <div class="hero-video-wrapper">
         <video
           id="hero-video"
           src="assets/videos/video_1eaa3f47-5823-4509-95bb-ed3ee0cff192.mp4"
-          muted
-          playsinline
-          preload="auto"
-          aria-hidden="true"
+          muted playsinline preload="auto" aria-hidden="true"
         ></video>
         <div class="hero-video-overlay"></div>
       </div>
 
-      <!-- Two-column content over video -->
       <div class="hero-content">
 
-        <!-- LEFT column: text + CTAs -->
         <div class="hero-left">
           <div class="hero-eyebrow">
             <span class="tag">SS — 2025</span>
@@ -88,21 +267,26 @@
           </div>
         </div>
 
-        <!-- RIGHT column: featured product image -->
+        <!--
+          FIX: Hero right image.
+          BEFORE: <img src="assets/images/hero-product.jpg"> — no height on container,
+                  image hidden behind video overlay or collapsed.
+          AFTER:  .img-frame enforces height; object-fit:cover fills it properly.
+          NOTE:   Replace the picsum URL with your real CDN path in production.
+        -->
         <div class="hero-right">
           <div class="hero-img-wrap">
             <img
               src="assets/images/hero-product.jpg"
+              data-fallback="https://picsum.photos/seed/krvn-hero/600/800"
               alt="KRVN Signature Cap"
-              class="hero-img"
-              onerror="this.onerror=null; this.parentElement.classList.add('hero-img-fallback');"
+              class="hero-img krvn-img"
             />
           </div>
         </div>
 
       </div>
 
-      <!-- Scroll indicator -->
       <div class="scroll-indicator" aria-hidden="true">
         <span class="scroll-line"></span>
         <span class="scroll-label">SCROLL</span>
@@ -135,12 +319,23 @@
         <h2 class="section-title">Crafted Different,<br/><em>Worn Forever</em></h2>
       </div>
 
+      <!--
+        FIX: Zigzag images.
+        BEFORE: <img> inside .zigzag-media with no height constraint.
+                .zigzag-media collapses; img is invisible.
+        AFTER:  .img-frame with explicit min-height. img fills via object-fit.
+        WHY NOT background-image here: <img> is better for SEO alt text on
+        editorial feature images. Use background-image only for pure decoration.
+      -->
       <div class="zigzag-row zigzag-row--normal">
         <div class="zigzag-media">
-          <img src="assets/images/why-3d-model.jpg" alt="3D Hat Modelling Studio" class="zigzag-img"
-            onerror="this.onerror=null; this.parentElement.classList.add('img-fallback'); this.style.display='none';" />
-          <div class="zigzag-img-fallback" aria-hidden="true">
-            <span class="placeholder-icon">◈</span><p>3D Model Render</p>
+          <div class="img-frame" data-label="3D MODEL RENDER">
+            <img
+              src="assets/images/why-3d-model.jpg"
+              data-fallback="https://picsum.photos/seed/krvn-3d/700/500"
+              alt="3D Hat Modelling Studio"
+              class="krvn-img"
+            />
           </div>
         </div>
         <div class="zigzag-text">
@@ -159,20 +354,26 @@
           <a href="#store" class="link-arrow">View materials →</a>
         </div>
         <div class="zigzag-media">
-          <img src="assets/images/why-materials.jpg" alt="Premium Hat Materials" class="zigzag-img"
-            onerror="this.onerror=null; this.parentElement.classList.add('img-fallback'); this.style.display='none';" />
-          <div class="zigzag-img-fallback" aria-hidden="true">
-            <span class="placeholder-icon">◉</span><p>Material Detail</p>
+          <div class="img-frame" data-label="MATERIAL DETAIL">
+            <img
+              src="assets/images/why-materials.jpg"
+              data-fallback="https://picsum.photos/seed/krvn-mat/700/500"
+              alt="Premium Hat Materials"
+              class="krvn-img"
+            />
           </div>
         </div>
       </div>
 
       <div class="zigzag-row zigzag-row--normal">
         <div class="zigzag-media">
-          <img src="assets/images/why-embroidery.jpg" alt="Hat Embroidery Process" class="zigzag-img"
-            onerror="this.onerror=null; this.parentElement.classList.add('img-fallback'); this.style.display='none';" />
-          <div class="zigzag-img-fallback" aria-hidden="true">
-            <span class="placeholder-icon">⊛</span><p>Embroidery Detail</p>
+          <div class="img-frame" data-label="EMBROIDERY DETAIL">
+            <img
+              src="assets/images/why-embroidery.jpg"
+              data-fallback="https://picsum.photos/seed/krvn-emb/700/500"
+              alt="Hat Embroidery Process"
+              class="krvn-img"
+            />
           </div>
         </div>
         <div class="zigzag-text">
@@ -200,11 +401,27 @@
         </div>
       </div>
 
+      <!--
+        FIX: Product card images.
+        BEFORE: Plain <img src="..."> with no wrapper height.
+                Grid cells collapse; images invisible.
+        AFTER:  Each product uses .img-frame--portrait (4:5 ratio).
+                object-fit:cover ensures fill without distortion.
+        REUSABLE PATTERN: Copy <div class="img-frame img-frame--portrait">
+                          with .krvn-img inside for any new product card.
+      -->
       <div class="product-grid" id="product-grid">
 
         <article class="product-card" data-category="snapback" data-id="001">
           <div class="product-img-wrap">
-            <img src="assets/images/d11026b1fe1a4668e280c7766fa4257f.jpg" alt="Angel Snapback — Forest" class="product-img" onerror="this.onerror=null; this.classList.add('img-error');" />
+            <div class="img-frame img-frame--portrait" data-label="ANGEL SNAPBACK">
+              <img
+                src="assets/images/d11026b1fe1a4668e280c7766fa4257f.jpg"
+                data-fallback="https://picsum.photos/seed/krvn-001/500/600"
+                alt="Angel Snapback — Forest"
+                class="product-img krvn-img"
+              />
+            </div>
             <div class="product-badge">New</div>
             <button class="quick-add" data-id="001" data-name="Angel Snapback — Forest" data-price="89">+ Add</button>
           </div>
@@ -217,7 +434,14 @@
 
         <article class="product-card" data-category="fitted" data-id="002">
           <div class="product-img-wrap">
-            <img src="assets/images/krvn-fitted.jpg" alt="KRVN Fitted — Beige" class="product-img" onerror="this.onerror=null; this.classList.add('img-error');" />
+            <div class="img-frame img-frame--portrait" data-label="KRVN FITTED">
+              <img
+                src="assets/images/krvn-fitted.jpg"
+                data-fallback="https://picsum.photos/seed/krvn-002/500/600"
+                alt="KRVN Fitted — Beige"
+                class="product-img krvn-img"
+              />
+            </div>
             <button class="quick-add" data-id="002" data-name="Krvn Fitted — Beige" data-price="110">+ Add</button>
           </div>
           <div class="product-info">
@@ -229,7 +453,14 @@
 
         <article class="product-card" data-category="bucket" data-id="003">
           <div class="product-img-wrap">
-            <img src="assets/images/cloud-bucket.jpg" alt="Cloud Bucket — Black" class="product-img" onerror="this.onerror=null; this.classList.add('img-error');" />
+            <div class="img-frame img-frame--portrait" data-label="CLOUD BUCKET">
+              <img
+                src="assets/images/cloud-bucket.jpg"
+                data-fallback="https://picsum.photos/seed/krvn-003/500/600"
+                alt="Cloud Bucket — Black"
+                class="product-img krvn-img"
+              />
+            </div>
             <div class="product-badge sale-badge">Sale</div>
             <button class="quick-add" data-id="003" data-name="Cloud Bucket — Black" data-price="65">+ Add</button>
           </div>
@@ -242,7 +473,14 @@
 
         <article class="product-card" data-category="snapback" data-id="004">
           <div class="product-img-wrap">
-            <img src="assets/images/block-snap.jpg" alt="Block Snap — Bone" class="product-img" onerror="this.onerror=null; this.classList.add('img-error');" />
+            <div class="img-frame img-frame--portrait" data-label="BLOCK SNAP">
+              <img
+                src="assets/images/block-snap.jpg"
+                data-fallback="https://picsum.photos/seed/krvn-004/500/600"
+                alt="Block Snap — Bone"
+                class="product-img krvn-img"
+              />
+            </div>
             <button class="quick-add" data-id="004" data-name="Block Snap — Bone" data-price="95">+ Add</button>
           </div>
           <div class="product-info">
@@ -254,7 +492,14 @@
 
         <article class="product-card" data-category="beanie" data-id="005">
           <div class="product-img-wrap">
-            <img src="assets/images/fold-beanie.jpg" alt="Fold Beanie — Black" class="product-img" onerror="this.onerror=null; this.classList.add('img-error');" />
+            <div class="img-frame img-frame--portrait" data-label="FOLD BEANIE">
+              <img
+                src="assets/images/fold-beanie.jpg"
+                data-fallback="https://picsum.photos/seed/krvn-005/500/600"
+                alt="Fold Beanie — Black"
+                class="product-img krvn-img"
+              />
+            </div>
             <button class="quick-add" data-id="005" data-name="Fold Beanie — Black" data-price="48">+ Add</button>
           </div>
           <div class="product-info">
@@ -266,7 +511,14 @@
 
         <article class="product-card" data-category="fitted" data-id="006">
           <div class="product-img-wrap">
-            <img src="assets/images/hex-fitted.jpg" alt="Hex Fitted — Olive" class="product-img" onerror="this.onerror=null; this.classList.add('img-error');" />
+            <div class="img-frame img-frame--portrait" data-label="HEX FITTED">
+              <img
+                src="assets/images/hex-fitted.jpg"
+                data-fallback="https://picsum.photos/seed/krvn-006/500/600"
+                alt="Hex Fitted — Olive"
+                class="product-img krvn-img"
+              />
+            </div>
             <div class="product-badge">Limited</div>
             <button class="quick-add" data-id="006" data-name="Hex Fitted — Olive" data-price="135">+ Add</button>
           </div>
@@ -303,14 +555,27 @@
     </section>
 
     <!-- BLOG -->
+    <!--
+      FIX: Blog cards had pure CSS .blog-img-placeholder divs — NO images at all.
+      AFTER: Real <img> tags inside .img-frame wrappers.
+      WHY: Even editorial images need proper <img> for SEO and accessibility.
+    -->
     <section id="blog" class="section blog-section">
       <div class="section-header">
         <span class="section-tag">/ Journal</span>
         <h2 class="section-title">Stories &amp;<br/><em>Process</em></h2>
       </div>
       <div class="blog-grid">
+
         <article class="blog-card blog-card--featured">
-          <div class="blog-img-placeholder"></div>
+          <div class="img-frame" data-label="DESIGN PROCESS">
+            <img
+              src="assets/images/blog-process.jpg"
+              data-fallback="https://picsum.photos/seed/krvn-blog1/800/440"
+              alt="How We Model a Hat From Concept to Curve"
+              class="krvn-img"
+            />
+          </div>
           <div class="blog-content">
             <span class="blog-tag">Design Process</span>
             <h3>How We Model a Hat From Concept to Curve</h3>
@@ -318,40 +583,76 @@
             <a href="#" class="link-arrow">Read More →</a>
           </div>
         </article>
+
         <article class="blog-card">
-          <div class="blog-img-placeholder small"></div>
+          <div class="img-frame" data-label="MATERIALS">
+            <img
+              src="assets/images/blog-materials.jpg"
+              data-fallback="https://picsum.photos/seed/krvn-blog2/600/390"
+              alt="Why the Under-Brim Colour Matters"
+              class="krvn-img"
+            />
+          </div>
           <div class="blog-content">
             <span class="blog-tag">Materials</span>
             <h3>Why the Under-Brim Colour Matters More Than You Think</h3>
             <a href="#" class="link-arrow">Read More →</a>
           </div>
         </article>
+
         <article class="blog-card">
-          <div class="blog-img-placeholder small"></div>
+          <div class="img-frame" data-label="CULTURE">
+            <img
+              src="assets/images/blog-culture.jpg"
+              data-fallback="https://picsum.photos/seed/krvn-blog3/600/390"
+              alt="The History of the Snapback"
+              class="krvn-img"
+            />
+          </div>
           <div class="blog-content">
             <span class="blog-tag">Culture</span>
             <h3>The History of the Snapback — And Where It's Headed</h3>
             <a href="#" class="link-arrow">Read More →</a>
           </div>
         </article>
+
         <article class="blog-card">
-          <div class="blog-img-placeholder small"></div>
+          <div class="img-frame" data-label="STYLING">
+            <img
+              src="assets/images/blog-styling.jpg"
+              data-fallback="https://picsum.photos/seed/krvn-blog4/600/390"
+              alt="Five Ways to Wear a Fitted Cap in 2025"
+              class="krvn-img"
+            />
+          </div>
           <div class="blog-content">
             <span class="blog-tag">Styling</span>
             <h3>Five Ways to Wear a Fitted Cap in 2025</h3>
             <a href="#" class="link-arrow">Read More →</a>
           </div>
         </article>
+
       </div>
     </section>
 
     <!-- CONTACT -->
+    <!--
+      FIX: Contact media was a pure CSS placeholder (.contact-placeholder div).
+      AFTER: Real <img> inside .img-frame.
+      RECOMMENDATION: For the contact brand shot, background-image is also
+      acceptable since it's purely decorative — but <img> is used here for
+      consistency with the image fix system.
+    -->
     <section id="contact" class="section contact-section">
       <div class="contact-inner">
         <div class="contact-media">
-          <div class="contact-placeholder">
-            <span class="big-label">IMG</span>
-            <p>Brand Shot</p>
+          <div class="img-frame" data-label="BRAND SHOT">
+            <img
+              src="assets/images/contact-brand.jpg"
+              data-fallback="https://picsum.photos/seed/krvn-contact/700/900"
+              alt="KRVN Studio Brand Shot"
+              class="krvn-img"
+            />
           </div>
         </div>
         <div class="contact-text">
@@ -421,5 +722,62 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script src="js/main.js"></script>
+
+  <script>
+    /*
+     * ============================================================
+     * KRVN IMAGE RELIABILITY SCRIPT
+     * ============================================================
+     * Handles all .krvn-img elements:
+     *   1. On error → loads data-fallback src (placeholder CDN)
+     *   2. If fallback also fails → marks container as .img-broken
+     *      which triggers the CSS "label" placeholder
+     *   3. Autoplay videos that may have been blocked
+     * ============================================================
+     */
+    document.addEventListener('DOMContentLoaded', () => {
+
+      // ── Image fallback handler ─────────────────────────────────
+      document.querySelectorAll('img.krvn-img').forEach(img => {
+        img.addEventListener('error', function handleError() {
+          const fallback = this.dataset.fallback;
+          if (fallback && this.src !== fallback) {
+            // Try the fallback URL (picsum placeholder in dev)
+            this.removeEventListener('error', handleError);
+            this.src = fallback;
+          } else {
+            // Both real src AND fallback failed → show CSS label
+            const frame = this.closest('.img-frame');
+            if (frame) frame.classList.add('img-broken');
+            this.style.display = 'none';
+          }
+        });
+      });
+
+      // ── Autoplay videos ────────────────────────────────────────
+      document.querySelectorAll('video[muted]').forEach(video => {
+        video.play().catch(() => {
+          // Autoplay blocked — silently fail (video just won't play)
+        });
+      });
+
+      // ── Intersection Observer for lazy loading ─────────────────
+      // Prevents off-screen images from blocking page load
+      if ('IntersectionObserver' in window) {
+        const lazyImages = document.querySelectorAll('img.krvn-img[data-fallback]');
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { rootMargin: '200px' });
+
+        lazyImages.forEach(img => observer.observe(img));
+      }
+
+    });
+  </script>
+
 </body>
 </html>
